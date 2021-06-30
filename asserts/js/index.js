@@ -36,6 +36,10 @@ function btnNextHandler(e) {
   loadUsers(options);
 }
 
+function userListItemHandler(e) {
+  console.log(this.name);
+}
+
 function loadUsers({ results, seed, page }) {
   fetch(
     `https://randomuser.me/api/?results=${results}&seed=${seed}&page=${page}`
@@ -49,7 +53,9 @@ function renderUsers(users) {
   if (userList) {
     userList.remove();
   }
+
   console.dir(users);
+
   const newUserList = document.createElement("ul");
   newUserList.classList.add("userList");
   document.getElementById("root").prepend(newUserList);
@@ -61,6 +67,7 @@ function renderUsers(users) {
 function createUserListItem({
   name: { first: firstName, last: lastName },
   picture: { large: userImageSrc },
+  gender: gender,
   dob: { age: age },
   email: email,
   cell: cell,
@@ -69,13 +76,15 @@ function createUserListItem({
   const userListItem = document.createElement("li");
   userListItem.classList.add("userListItem");
 
+  if (gender === "female") {
+    userListItem.classList.add("female");
+  }
+
   userListItem.append(createUserImage(userImageSrc));
   userListItem.append(createUserFullName(firstName, lastName));
   userListItem.append(createUserOtherData(age, email, cell, country));
-  // userListItem.append(createUserAge(age));
-  // userListItem.append(createUserEmail(email));
-  // userListItem.append(createUserCell(cell));
-  // userListItem.append(createUserCountry(country));
+
+  userListItem.addEventListener("click", e => chooseUser(firstName, lastName));
 
   return userListItem;
 }
@@ -100,3 +109,5 @@ function createUserOtherData(age, email, cell, country) {
   div.innerText = `Age: ${age}, email: ${email}, cell: ${cell}, country: ${country}`;
   return div;
 }
+
+function chooseUser(firstName, lastName) {}

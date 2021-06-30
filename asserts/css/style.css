@@ -11,23 +11,18 @@
 .userListItem {
   margin: 20px;
   width: 200px;
-  /* border: 2px solid red;
-  border-radius: 5px; */
   text-align: center;
   cursor: pointer;
-}
-
-.userListItem:hover {
-  opacity: 0.5;
-  transition: opacity 150ms linear;
-}
-
-.userListItem {
   position: relative;
   z-index: 0;
   border-radius: 10px;
   overflow: hidden;
   align-items: center;
+}
+
+.userListItem:hover {
+  opacity: 0.5;
+  transition: opacity 150ms linear;
 }
 
 .userListItem::before {
@@ -46,6 +41,13 @@
     linear-gradient(#337ab7, #337ab7), linear-gradient(#bfe2ff, #bfe2ff),
     linear-gradient(#337ab7, #337ab7);
   animation: anim 4s linear infinite;
+}
+
+.female::before {
+  background-color: #f8bfff;
+  background-image: linear-gradient(#f8bfff, #f8bfff),
+    linear-gradient(#b7339a, #b7339a), linear-gradient(#f8bfff, #f8bfff),
+    linear-gradient(#b7339a, #b7339a);
 }
 .userListItem::after {
   content: "";
@@ -81,6 +83,7 @@
 }
 
 .userOtherData {
+  /* white-space: pre-line; */
   /* margin: 10%; */
   max-width: 160px;
 }
