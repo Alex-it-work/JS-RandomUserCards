@@ -10,7 +10,7 @@
 
 .userListItem {
   margin: 20px;
-  width: 200px;
+  width: 300px;
   text-align: center;
   cursor: pointer;
   position: relative;
@@ -49,6 +49,7 @@
     linear-gradient(#b7339a, #b7339a), linear-gradient(#f8bfff, #f8bfff),
     linear-gradient(#b7339a, #b7339a);
 }
+
 .userListItem::after {
   content: "";
   position: absolute;
@@ -65,7 +66,14 @@
     transform: rotate(1turn);
   }
 }
+
+.choosenCard::after {
+  background: linear-gradient(to bottom right, rgb(80, 247, 74), white);
+  transition: all 150ms linear;
+}
+
 .userListItem > img {
+  margin-top: 15px;
   border-radius: 50%;
 }
 
@@ -83,7 +91,22 @@
 }
 
 .userOtherData {
-  /* white-space: pre-line; */
-  /* margin: 10%; */
-  max-width: 160px;
+  margin: 10%;
+}
+
+.choosenUserList {
+  margin: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.choosenUser {
+  flex-basis: auto;
+  margin: 10px;
+  border: rgb(248, 120, 120) solid 7px;
+  border-radius: 7px;
+  background-color: rgb(248, 120, 120);
 }

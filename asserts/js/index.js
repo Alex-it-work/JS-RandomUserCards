@@ -19,6 +19,8 @@ btnStart.addEventListener("click", btnStartHandler);
 btnPrev.addEventListener("click", btnPrevHandler);
 btnNext.addEventListener("click", btnNextHandler);
 
+const choosenUserList = createChoosenUsersList();
+
 function btnStartHandler(e) {
   options.page = 1;
   loadUsers(options);
@@ -36,9 +38,9 @@ function btnNextHandler(e) {
   loadUsers(options);
 }
 
-function userListItemHandler(e) {
-  console.log(this.name);
-}
+// function userListItemHandler(e) {
+//   console.log(this.name);
+// }
 
 function loadUsers({ results, seed, page }) {
   fetch(
@@ -58,7 +60,7 @@ function renderUsers(users) {
 
   const newUserList = document.createElement("ul");
   newUserList.classList.add("userList");
-  document.getElementById("root").prepend(newUserList);
+  choosenUserList.after(newUserList);
 
   const liUserCollection = users.map(user => createUserListItem(user));
   newUserList.append(...liUserCollection);
@@ -79,13 +81,21 @@ function createUserListItem({
   if (gender === "female") {
     userListItem.classList.add("female");
   }
+  const choosenUser = document.querySelectorAll(".choosenUser");
+  for (let i = 0; i < choosenUser.length; i++) {
+    if (choosenUser[i].innerText === `${firstName} ${lastName}`) {
+      userListItem.classList.add("choosenCard");
+    }
+  }
 
   userListItem.append(createUserImage(userImageSrc));
   userListItem.append(createUserFullName(firstName, lastName));
   userListItem.append(createUserOtherData(age, email, cell, country));
 
   userListItem.addEventListener("click", e => chooseUser(firstName, lastName));
-
+  userListItem.addEventListener("click", e => {
+    userListItem.classList.toggle("choosenCard");
+  });
   return userListItem;
 }
 
@@ -103,11 +113,37 @@ function createUserFullName(firstName, lastName) {
   return div;
 }
 
-function createUserOtherData(age, email, cell, country) {
+function createUserOtherData(...userDataCollection) {
   const div = document.createElement("div");
   div.classList.add("userOtherData");
-  div.innerText = `Age: ${age}, email: ${email}, cell: ${cell}, country: ${country}`;
+
+  for (let i = 0; i < userDataCollection.length; i++) {
+    const span = document.createElement("span");
+    span.innerText = `${userDataCollection[i]}`;
+    div.append(span);
+  }
   return div;
 }
 
-function chooseUser(firstName, lastName) {}
+function chooseUser(firstName, lastName) {
+  const userFullName = `${firstName} ${lastName}`;
+
+  const liChoosenUsers = document.querySelectorAll(".choosenUser");
+  for (let i = 0; i < liChoosenUsers.length; i++) {
+    if (liChoosenUsers[i].innerText === userFullName) {
+      liChoosenUsers[i].remove();
+      return;
+    }
+  }
+  const newLiChoosenUser = document.createElement("li");
+  newLiChoosenUser.classList.add("choosenUser");
+  newLiChoosenUser.innerText = userFullName;
+  choosenUserList.append(newLiChoosenUser);
+}
+
+function createChoosenUsersList() {
+  const newChoosenUserList = document.createElement("ul");
+  newChoosenUserList.classList.add("choosenUserList");
+  document.getElementById("root").prepend(newChoosenUserList);
+  return newChoosenUserList;
+}
