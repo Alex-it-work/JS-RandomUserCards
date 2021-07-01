@@ -38,10 +38,6 @@ function btnNextHandler(e) {
   loadUsers(options);
 }
 
-// function userListItemHandler(e) {
-//   console.log(this.name);
-// }
-
 function loadUsers({ results, seed, page }) {
   fetch(
     `https://randomuser.me/api/?results=${results}&seed=${seed}&page=${page}`
@@ -55,8 +51,6 @@ function renderUsers(users) {
   if (userList) {
     userList.remove();
   }
-
-  console.dir(users);
 
   const newUserList = document.createElement("ul");
   newUserList.classList.add("userList");
@@ -127,8 +121,8 @@ function createUserOtherData(...userDataCollection) {
 
 function chooseUser(firstName, lastName) {
   const userFullName = `${firstName} ${lastName}`;
-
   const liChoosenUsers = document.querySelectorAll(".choosenUser");
+
   for (let i = 0; i < liChoosenUsers.length; i++) {
     if (liChoosenUsers[i].innerText === userFullName) {
       liChoosenUsers[i].remove();

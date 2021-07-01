@@ -61,6 +61,7 @@
   background: white;
   border-radius: 5px;
 }
+
 @keyframes anim {
   100% {
     transform: rotate(1turn);
@@ -79,6 +80,28 @@
 
 .userFullName {
   margin: 15px;
+  font-family: "Roboto Slab", serif;
+  text-align: center;
+  font-size: 30px;
+  font-weight: normal;
+  color: transparent;
+  text-shadow: 0 0 1px #ff3232, 1px 1px 1px #00dcdc, -1px -1px 1px #eee;
+  animation: glitch 4s ease-in-out infinite alternate;
+}
+
+@keyframes glitch {
+  0%,
+  40%,
+  44%,
+  100% {
+    transform: skewX(0deg);
+  }
+  41% {
+    transform: skewX(10deg);
+  }
+  42% {
+    transform: skewX(-10deg);
+  }
 }
 
 .buttonContainer {
@@ -91,7 +114,14 @@
 }
 
 .userOtherData {
+  display: flex;
+  flex-direction: column;
   margin: 10%;
+}
+
+.userOtherData > span {
+  margin-bottom: 5px;
+  opacity: 0.5;
 }
 
 .choosenUserList {
@@ -99,7 +129,7 @@
   text-align: center;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
