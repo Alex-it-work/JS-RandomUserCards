@@ -82,8 +82,7 @@
   margin: 15px;
   font-family: "Roboto Slab", serif;
   text-align: center;
-  font-size: 30px;
-  font-weight: normal;
+  font-size: 20px;
   color: transparent;
   text-shadow: 0 0 1px #ff3232, 1px 1px 1px #00dcdc, -1px -1px 1px #eee;
   animation: glitch 4s ease-in-out infinite alternate;
